@@ -10,7 +10,7 @@ while cap.isOpened():
     blur=cv2.GaussianBlur(gray,(5,5),0)
     check,thresh_delta=cv2.threshold(blur,30,255,cv2.THRESH_BINARY)
     thresh_dilated=cv2.dilate(thresh_delta ,np.ones((2,2),np.uint8), iterations=1)
-    img,c,h=cv2.findContours(thresh_dilated,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    c,h=cv2.findContours(thresh_dilated,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     font=cv2.FONT_HERSHEY_SIMPLEX
     cv2.drawContours(frame1,c,-1,(0,255,0),2)
     cv2.imshow("motion",frame1)
