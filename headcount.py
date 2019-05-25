@@ -6,7 +6,7 @@ import os
 cap=cv2.VideoCapture(0)
 #cap=cv2.VideoCapture("https://192.168.43.1:8080/video")
 #Trainnig our classifier for face detection using haar file(.xml)
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalcatface.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface.xml')
 #eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 font=cv2.FONT_ITALIC
 while cap.isOpened():
