@@ -1,7 +1,9 @@
 #!usr/bin/env python3
+#code to concate two images 
 import cv2
 import numpy as np
 picture=cv2.imread('iron.jpeg',1)
+
 #gray_pic=cv2.cvtColor(picture,cv2.COLOR_BGR2GRAY)
 
 i1=cv2.resize(picture,(600,450))
