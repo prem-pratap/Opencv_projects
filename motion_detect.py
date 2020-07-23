@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+#motion detection code
 import  cv2
 #      we are taking 3 frames 
 def    imgdiff(x,y,z):
