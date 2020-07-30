@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+#obstacles removal with HSV
+
 #function to draw at coordinates of event
 def draw(event,x,y,flags,parameters):
     if event == cv2.EVENT_LBUTTONDOWN:
