@@ -14,43 +14,45 @@ warnings.filterwarnings('ignore')
 
 
 #defininng directories
-train_dir='train'
-test_dir='test'
-img_size=50
+train_dir='/home/prem/Downloads/faces/train'
+test_dir='/home/prem/Downloads/faces/test'
+img_size=45
 lr=1e-3
 model_name='Image classifier using cnn'
 
 #one hot enocoding
 def create_label(image_name):
-    word_label=image_name.split('.')[-3]
-    if word_label=='cat':
+    word_label=image_name.split('_')[-2]
+    if word_label=='human':
         return np.array([1,0])
-    elif word_label=='dog':
+    elif word_label=='nonhuman':
         return np.array([0,1])
 def create_train_data():
     training_data=[]
     for img in os.listdir(train_dir):
-        path=os.path.join(train_dir,img)
+        #path=os.path.join(train_dir,img)
+        path=train_dir+"/"+img
         img_data=cv2.imread(path,0)
-        img_data=cv2.resize(img_data,(img_size,img_size))
+        #img_data=cv2.resize(img_data,(img_size,img_size))
         training_data.append([np.array(img_data),create_label(img)])
     shuffle(training_data)
-    np.save('train_data.npy',training_data)
+    np.save('rtfr_data.npy',training_data)
     return training_data
 def create_test_data():
     testing_data=[]
     for img in os.listdir(test_dir):
-        path=os.path.join(test_dir,img)
+        #path=os.path.join(test_dir,img)
+        path=train_dir+"/"+img
         img_num=img.split('.')[0]
         img_data=cv2.imread(path,0)
-        img_data=cv2.resize(img_data,(img_ksize,img_size))
+        #img_data=cv2.resize(img_data,(img_size,img_size))
         testing_data.append([np.array(img_data),img_num])
     shuffle(testing_data)
-    np.save('test_data.npy',testing_data)
+    np.save('rtfr_data.npy',testing_data)
     return testing_data
 
-train=create_train_data()
-test=create_test_data()
+train_data=create_train_data()
+test_data=create_test_data()
 
 train=train_data[:-500]
 test=test_data[-500:]
@@ -79,13 +81,13 @@ for num,data in enumerate(test_data[:16]):
     img_num=data[1]
     img_data=data[0]
     y=fig.add_subplot(4,4,num+1)
-    orig=img_data
-    data=img_data.reshape(img_size,img_size,1)
-    model_out=model.predict([data][0])
+    #orig=img_data
+    #data=img_data.reshape(img_size,img_size,1)
+    model_out=model.predict([img_data][0])
     if np.argmax(model_out)==1:
-        str_label='Dog'
+        str_label='NonHuman'
     else:
-        str_label='Cat'
+        str_label='Human'
         
     y.imshow(orig,cmap='gray')
     plt.title(str_label)
